@@ -1,5 +1,6 @@
 ---
 title: "IODS course project"
+author: johanna tuhkanen
 output:
   html_document:
     theme: cosmo
