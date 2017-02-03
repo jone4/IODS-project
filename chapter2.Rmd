@@ -1,4 +1,4 @@
-# Insert chapter 2 title here
+# Week2 analysis
 
 *Describe the work you have done this week and summarize your learning.*
 
@@ -6,9 +6,35 @@
 - Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods
 - Assume the reader has no previous knowledge of your data or the more advanced methods you are using  
 
+
+```{r}
 setwd("C:\\Users\\Tommy\\Desktop\\IODS17\\IODS-project")
 getwd()
 
+students2014<-read.table("learningFile2014.txt", head=T)
+
+
+
+dim(students2014)
+```
+
+There are 184 observations and 60 variables.
+
 ```{r}
-students2014<-read.table("learningFile2014.txt")
+str(students2014)
+```
+
+
+
+Str says how many levels each factor has. For example vi factor has 6 levels (numbers from 1-6)
+
+```{r}
+summary(students2014)
+```
+Here we can see the summary of the data. There you can se further information about each variable and their levels.
+
+```{r}
+
+mallini<-lm(V59~ V29+ V13+ V15, data=students2014)
+
 ```
