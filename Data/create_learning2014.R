@@ -1,6 +1,8 @@
 # Johanna Tuhkanen
 # 28.1.2017
 # I start week 2 exercises.
+# Data wrangling
+
 learning2014<- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt")
 
 str(learning2014)
@@ -20,3 +22,4 @@ learning2014<-read.table("learningFile2014.txt")
 str(learning2014)
 head(learning2014)
 # It looks correct.
+
