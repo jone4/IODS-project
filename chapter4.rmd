@@ -17,26 +17,20 @@ We can see that Boston-data has 506 observations and 14 variables.
  
  
  
-  Summary tells us some basic statistics about each 14 variables and pairs shows scatterplot about each varaibles.
-  
-  
 
-  
-  
-  Now the data is standardisez so that the mean of each variable is 0. 
  
 ```{r}
  pairs(Boston)
   summary(Boston)
 ```
-
+Summary tells us some basic statistics about each 14 variables and pairs shows scatterplot about each varaibles.
 
 ```{r}
 boston_scaled <- scale(Boston)
 summary(boston_scaled)
 boston_scaled <- as.data.frame(boston_scaled)
 ```
-
+  Now the data is standardisez so that the mean of each variable is 0. 
 
 ```{r}
 scaled_crim <- boston_scaled$crim
