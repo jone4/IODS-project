@@ -1,0 +1,82 @@
+# Week 4 analysis
+
+
+
+ 
+```{r}
+library(MASS)
+ data("Boston")
+ str(Boston)
+ dim(Boston)
+```
+
+
+We can see that Boston-data has 506 observations and 14 variables.
+  
+  
+ 
+ 
+ 
+  Summary tells us some basic statistics about each 14 variables and pairs shows scatterplot about each varaibles.
+  
+  
+
+  
+  
+  Now the data is standardisez so that the mean of each variable is 0. 
+ 
+```{r}
+ pairs(Boston)
+  summary(Boston)
+```
+
+
+```{r}
+boston_scaled <- scale(Boston)
+summary(boston_scaled)
+boston_scaled <- as.data.frame(boston_scaled)
+```
+
+
+```{r}
+scaled_crim <- boston_scaled$crim
+bins <- quantile(scaled_crim)
+crime <- cut(scaled_crim, breaks = bins, include.lowest = TRUE)
+boston_scaled<- dplyr:: select(boston_scaled, -crim)
+boston_scaled<- data.frame(boston_scaled, crime)
+n<- nrow(boston_scaled)
+ind <- sample(n,  size = n * 0.8)
+train <- boston_scaled[ind,]
+test <- boston_scaled[-ind,]
+correct_classes <-test$crime
+test <- dplyr::select(test, -crime)
+
+
+
+
+
+lda.fit<- lda(crime~., data = train)
+
+lda.arrows <- function(x, myscale = 1, arrow_heads = 0.1, color = "red", tex = 0.75, choices = c(1,2)){
+  heads <- coef(x)
+  arrows(x0 = 0, y0 = 0, 
+         x1 = myscale * heads[,choices[1]], 
+         y1 = myscale * heads[,choices[2]], col=color, length = arrow_heads)
+  text(myscale * heads[,choices], labels = row.names(heads), 
+       cex = tex, col=color, pos=3)
+}
+classes <- as.numeric(train$crime)
+
+
+plot(lda.fit, dimen = 2, col=classes, pch= classes)
+lda.arrows(lda.fit, myscale = 1)
+
+lda.pred <- predict(lda.fit, newdata = test)
+table(correct = correct_classes, predicted = lda.pred$class)
+ 
+```
+
+
+
+  
+  
