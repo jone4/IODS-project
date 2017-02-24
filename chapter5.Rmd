@@ -1,0 +1,25 @@
+---
+title: "IODSviikko5rm"
+output: html_document
+---
+
+```{}
+human<- read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", sep=",", header=T)
+dim(human)
+str(human)
+pairs(human)
+summary(human)
+```
+There are 8 variables. In the picture you can see all possible scatter plots from the columns of a data frame, resulting in a scatter plot matrix.
+
+```{r}
+pca_human <- prcomp(human)
+biplot(pca_human, choices = 1:2)
+
+human_std <- scale(human)
+pca_human_std <- prcomp(human_std)
+biplot(pca_human_std, choices = 1:2)
+
+```
+
+  The results of biplot picture are different between unstandardized and standardized human data.
